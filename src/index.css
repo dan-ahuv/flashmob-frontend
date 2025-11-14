@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Kdam Thmor Pro";
+  src: url("/src/assets/fonts/KdamThmorPro-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Afacad";
+  src: url("/src/assets/fonts/Afacad-VariableFont_wght.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --navbar: #A8C0E0;
+  --faded-navbar: #D4E6FF;
+  --background: #FFFFFF;
+  --secondary: #F5F5F5;
+  --text: #1E1E1E;
+  --faded-text: #C1C5DB;
+  --accent: #1A8DFF;
+}
+
+.dark {
+  --navbar: #1E2A3A;
+  --faded-navbar: #2F3F55;
+  --background: #0F111A;
+  --secondary: #1A1F2B;
+  --text: #E8EAF5;
+  --faded-text: #7D839C;
+  --accent: #1A8DFF;
+}
+
+body {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+}
