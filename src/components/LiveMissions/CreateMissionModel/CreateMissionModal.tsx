@@ -14,7 +14,7 @@ interface Props {
   onSubmit: (mission: Mission) => void;
 }
 
-const CreateMissionModel: React.FC<Props> = ({ isOpen, onClose, onSubmit }) => {
+const CreateMissionModal: React.FC<Props> = ({ isOpen, onClose, onSubmit }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<Partial<Mission>>({});
   const [error, setError] = useState<string>("");
@@ -83,4 +83,4 @@ const CreateMissionModel: React.FC<Props> = ({ isOpen, onClose, onSubmit }) => {
   );
 };
 
-export default CreateMissionModel;
+export default CreateMissionModal;

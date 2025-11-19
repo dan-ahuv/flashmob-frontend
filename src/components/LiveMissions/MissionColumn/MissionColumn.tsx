@@ -1,12 +1,12 @@
 import React from "react";
 import { useDroppable } from "@dnd-kit/core";
-import SortableMissionCard from "../MissionCard/SortableMissionCard";
+import MissionCard from "../MissionCard/MissionCard";
 import type { Mission, MissionStatus } from "../../../types/mission";
 
 interface Props {
   status: MissionStatus;
   missions: Mission[];
-  onUpdateMission: (updated: Mission) => void; 
+  onUpdateMission: (updated: Mission) => void;
 }
 
 const MissionColumn: React.FC<Props> = ({ status, missions, onUpdateMission }) => {
@@ -19,7 +19,7 @@ const MissionColumn: React.FC<Props> = ({ status, missions, onUpdateMission }) =
         isOver ? "bg-[var(--accent)]" : "bg-[var(--secondary)]"
       }`}
       style={{
-        minHeight: "calc(100vh - 200px)",  // stretch to almost bottom
+        minHeight: "calc(100vh - 200px)",
         maxHeight: "calc(100vh - 200px)",
       }}
     >
@@ -29,10 +29,11 @@ const MissionColumn: React.FC<Props> = ({ status, missions, onUpdateMission }) =
       {/* Scrollable cards container */}
       <div className="flex-1 overflow-y-auto px-4 pb-4" style={{ pointerEvents: "auto" }}>
         {missions.map((mission) => (
-          <SortableMissionCard
+          <MissionCard
             key={mission.id}
             mission={mission}
-            onUpdate={onUpdateMission} // pass the callback
+            onUpdate={onUpdateMission}
+            sortable={true} // now each card handles its own sortable behavior
           />
         ))}
       </div>

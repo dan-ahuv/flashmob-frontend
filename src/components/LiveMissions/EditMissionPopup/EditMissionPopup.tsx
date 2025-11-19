@@ -1,9 +1,11 @@
+// components/.../EditMissionPopup.tsx
 import React, { useState } from "react";
 import Modal from "../../Model/Model";
 import type { Mission } from "../../../types/mission";
 import GeneralInfoTab from "./Tabs/GeneralInfoTab";
 import PlatformsTab from "./Tabs/PlatfromsTab";
 import TeamTab from "./Tabs/TeamTab";
+import { validateEditMission } from "../../../utils/validateEditMission";
 
 interface Props {
   mission: Mission;
@@ -17,8 +19,19 @@ const EditMissionPopup: React.FC<Props> = ({ mission, onClose, onSave }) => {
   // Local state for the entire mission
   const [localMission, setLocalMission] = useState<Mission>({ ...mission });
 
+  // Validation errors
+  const [errors, setErrors] = useState<string[]>([]);
+
   const handleSave = () => {
-    onSave(localMission); // save full mission
+    const errs = validateEditMission(localMission);
+    if (errs.length > 0) {
+      setErrors(errs);
+      // Optionally jump to first tab that likely contains the error:
+      // we'll keep the user on the current tab but you could setActiveTab(...) here.
+      return;
+    }
+    // valid
+    onSave(localMission);
     onClose();
   };
 
@@ -52,10 +65,34 @@ const EditMissionPopup: React.FC<Props> = ({ mission, onClose, onSave }) => {
         )}
       </div>
 
+      {/* Errors (if any) */}
+      {errors.length > 0 && (
+        <div className="mx-4 mt-4">
+          <div className="p-3 rounded border border-red-400 bg-red-50 text-sm text-red-800">
+            <div className="font-semibold mb-2">Please fix these issues before saving:</div>
+            <ul className="list-disc list-inside space-y-1">
+              {errors.map((e, i) => (
+                <li key={i}>{e}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
       {/* Save / Cancel buttons */}
-    <div className="flex justify-end mt-4 gap-2 px-4 pb-4">
-    <button onClick={onClose} className="bg-[var(--background)] text-[var(--text)] px-4 py-2 rounded border-2 border-[var(--accent)] hover:opacity-80"> Cancel </button>
-    <button onClick={handleSave} className="bg-[var(--accent)] text-white px-4 py-2 rounded hover:opacity-80">Save</button>
+      <div className="flex justify-end mt-4 gap-2 px-4 pb-4">
+        <button
+          onClick={onClose}
+          className="bg-[var(--background)] text-[var(--text)] px-4 py-2 rounded border-2 border-[var(--accent)] hover:opacity-80"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleSave}
+          className="bg-[var(--accent)] text-white px-4 py-2 rounded hover:opacity-80"
+        >
+          Save
+        </button>
       </div>
     </Modal>
   );
