@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import Modal from "../../Model/Model";
 import type { Mission } from "../../../types/mission";
-import GeneralInfoTab from "./Tabs/GeneralInfoTab";
-import PlatformsTab from "./Tabs/PlatfromsTab";
-import TeamTab from "./Tabs/TeamTab";
+import GeneralInfoTab from "./Tabs/GeneralInfoTab/GeneralInfoTab";
+import PlatformsTab from "./Tabs/PlatformTab.tsx/PlatfromsTab";
+import TeamTab from "./Tabs/TeamTab/TeamTab";
 import { validateEditMission } from "../../../utils/validateEditMission";
 
 interface Props {
